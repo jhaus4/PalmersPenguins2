@@ -1,0 +1,26 @@
+duckdb                  Connect to a DuckDB database instance
+duckdb-package          DuckDB client package for R
+duckdb_explain-class    DuckDB EXPLAIN query tree
+duckdb_get_substrait    Get the Substrait plan for a SQL query
+                        Transforms a SQL query into a raw vector
+                        containing the serialized Substrait query blob
+duckdb_get_substrait_json
+                        Get the Substrait plan for a SQL query in the
+                        JSON format Transforms a SQL query into a
+                        vector containing the serialized Substrait
+                        query JSON
+duckdb_prepare_substrait
+                        Query DuckDB using Substrait Method for
+                        interpreting a Substrait BLOB plan as a DuckDB
+                        Query Plan It interprets and executes the
+                        query.
+duckdb_prepare_substrait_json
+                        Query DuckDB using Substrait Method for
+                        interpreting a Substrait JSON plan as a DuckDB
+                        Query Plan It interprets and executes the
+                        query.
+duckdb_read_csv         Reads a CSV file into DuckDB
+duckdb_register         Register a data frame as a virtual table
+duckdb_register_arrow   Register an Arrow data source as a virtual
+                        table
+simulate_duckdb         DuckDB SQL backend for dbplyr
