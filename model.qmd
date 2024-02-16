@@ -5,6 +5,10 @@ format:
     code-fold: true
 ---
 
+```{r}
+library(reticulate)
+```
+
 ```{python}
 from palmerpenguins import penguins
 from pandas import get_dummies
