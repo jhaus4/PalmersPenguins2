@@ -1,0 +1,70 @@
+"0","import requests"
+"0",""
+"0","req_data = {"
+"0","  ""bill_length_mm"": 0,"
+"0","  ""species_Chinstrap"": False,"
+"0","  ""species_Gentoo"": False,"
+"0","  ""sex_male"": False"
+"0","}"
+"0","req = requests.post('http://127.0.0.1:8080/predict', json = [req_data])"
+"2","Traceback (most recent call last):
+  File ""[90m]8;line = 198;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.py]8;;[39m"", line 198, in _new_conn
+    sock = connection.create_connection(
+  File ""[90m]8;line = 85;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\util\connection.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\util\connection.py]8;;[39m"", line 85, in create_connection
+    raise err
+  File ""[90m]8;line = 73;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\util\connection.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\util\connection.py]8;;[39m"", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""[90m]8;line = 793;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.py]8;;[39m"", line 793, in urlopen
+    response = self._make_request(
+  File ""[90m]8;line = 496;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.py]8;;[39m"", line 496, in _make_request
+    conn.request(
+  File ""[90m]8;line = 400;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.py]8;;[39m"", line 400, in request
+    self.endheaders()
+  File ""[90m]8;line = 1248;file://C:\Program Files\Python39\Lib\http\client.pyC:\Program Files\Python39\lib\http\client.py]8;;[39m"", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File ""[90m]8;line = 1008;file://C:\Program Files\Python39\Lib\http\client.pyC:\Program Files\Python39\lib\http\client.py]8;;[39m"", line 1008, in _send_output
+    self.send(msg)
+  File ""[90m]8;line = 948;file://C:\Program Files\Python39\Lib\http\client.pyC:\Program Files\Python39\lib\http\client.py]8;;[39m"", line 948, in send
+    self.connect()
+  File ""[90m]8;line = 238;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.py]8;;[39m"", line 238, in connect
+    self.sock = self._new_conn()
+  File ""[90m]8;line = 213;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connection.py]8;;[39m"", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000021B335E3D60>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""[90m]8;line = 486;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\adapters.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\adapters.py]8;;[39m"", line 486, in send
+    resp = conn.urlopen(
+  File ""[90m]8;line = 847;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.py]8;;[39m"", line 847, in urlopen
+    retries = retries.increment(
+  File ""[90m]8;line = 515;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\util\retry.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\urllib3\util\retry.py]8;;[39m"", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=8080): Max retries exceeded with url: /predict (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021B335E3D60>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 115;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\api.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\api.py]8;;[39m"", line 115, in post
+    return request(""post"", url, data=data, json=json, **kwargs)
+  File ""[90m]8;line = 59;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\api.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\api.py]8;;[39m"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File ""[90m]8;line = 589;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\sessions.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\sessions.py]8;;[39m"", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""[90m]8;line = 703;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\sessions.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\sessions.py]8;;[39m"", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File ""[90m]8;line = 519;file://C:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\adapters.pyC:\Users\Jessica.Hauschild\AppData\Roaming\Python\Python39\site-packages\requests\adapters.py]8;;[39m"", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8080): Max retries exceeded with url: /predict (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021B335E3D60>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+"
+"0","res = req.json().get('predict')[0]"
+"0","print(res)"
+"1","2169.269720939398
+"

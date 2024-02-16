@@ -1,0 +1,103 @@
+---
+title: "Model"
+format:
+  html:
+    code-fold: true
+---
+
+```{python}
+from palmerpenguins import penguins
+from pandas import get_dummies
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn import preprocessing
+```
+
+## Get Data
+
+```{python}
+import duckdb
+from palmerpenguins import penguins
+
+con = duckdb.connect('my-db.duckdb')
+df = con.execute("SELECT * FROM penguins").fetchdf().dropna()
+
+df.head(3)
+```
+
+## Define Model and Fit
+
+```{python}
+X = get_dummies(df[['bill_length_mm', 'species', 'sex']], drop_first = True)
+y = df['body_mass_g']
+
+model = LinearRegression().fit(X, y)
+```
+
+## Get some information
+
+```{python}
+print(f"R^2 {model.score(X,y)}")
+print(f"Intercept {model.intercept_}")
+print(f"Columns {X.columns}")
+print(f"Coefficients {model.coef_}")
+
+```
+
+```{python}
+from vetiver import VetiverModel
+v = VetiverModel(model, model_name = 'penguin_model', prototype_data = X)
+```
+
+```{python}
+from pins import board_folder
+from vetiver import vetiver_pin_write
+b = board_folder('data/model', allow_pickle_read = True)
+vetiver_pin_write(b, v)
+```
+
+```{python}
+from vetiver import VetiverAPI
+app = VetiverAPI(v, check_prototype = True)
+```
+
+```{python}
+#from vetiver import prepare_docker
+#prepare_docker(b, 'penguin_model')
+```
+
+```{python}
+import requests
+
+req_data = {
+  "bill_length_mm": 0,
+  "species_Chinstrap": False,
+  "species_Gentoo": False,
+  "sex_male": False
+}
+req = requests.post('http://127.0.0.1:8080/predict', json = [req_data])
+res = req.json().get('predict')[0]
+print(res)
+```
+
+```{r}
+library(httr2)
+req <- httr2::request("http://127.0.0.1:8080/predict") |>
+  httr2::req_body_json(
+    list(
+      list(
+        "bill_length_mm" = 0,
+        "species_Chinstrap" = FALSE,
+        "species_Gentoo" = FALSE,
+        "sex_male" = FALSE
+      )
+    )
+  ) |>
+  httr2::req_perform()
+res <- httr2::resp_body_json(req)$predict[[1]]
+res
+```
+
+```{python}
+con.close()
+```

@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "eda.html",
+    "href": "eda.html",
+    "title": "Penguins EDA",
+    "section": "",
+    "text": "Code\nlibrary(palmerpenguins)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(DBI)\nlibrary(duckdb)\n\ncon &lt;- DBI::dbConnect(duckdb::duckdb(), dbdir = \"my-db.duckdb\")\ndf &lt;- dplyr::tbl(con, \"penguins\")\n\n\n\n\nCode\ndf %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    across(\n        ends_with(\"mm\") | ends_with(\"g\"),\n      \\(x) mean(x, na.rm = TRUE)\n      )\n    ) %&gt;%\n  dplyr::collect() %&gt;%\n  knitr::kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nsex\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\nNA\n37.84000\n18.32000\n185.6000\n3540.000\n\n\nAdelie\nfemale\n37.25753\n17.62192\n187.7945\n3368.836\n\n\nAdelie\nmale\n40.39041\n19.07260\n192.4110\n4043.493\n\n\nChinstrap\nfemale\n46.57353\n17.58824\n191.7353\n3527.206\n\n\nChinstrap\nmale\n51.09412\n19.25294\n199.9118\n3938.971\n\n\nGentoo\nNA\n45.62500\n14.55000\n215.7500\n4587.500\n\n\nGentoo\nfemale\n45.56379\n14.23793\n212.7069\n4679.741\n\n\nGentoo\nmale\n49.47377\n15.71803\n221.5410\n5484.836"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "eda.html#penguin-size-and-mass-by-sex-and-species",
+    "href": "eda.html#penguin-size-and-mass-by-sex-and-species",
+    "title": "Penguins EDA",
+    "section": "",
+    "text": "Code\nlibrary(palmerpenguins)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(DBI)\nlibrary(duckdb)\n\ncon &lt;- DBI::dbConnect(duckdb::duckdb(), dbdir = \"my-db.duckdb\")\ndf &lt;- dplyr::tbl(con, \"penguins\")\n\n\n\n\nCode\ndf %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    across(\n        ends_with(\"mm\") | ends_with(\"g\"),\n      \\(x) mean(x, na.rm = TRUE)\n      )\n    ) %&gt;%\n  dplyr::collect() %&gt;%\n  knitr::kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nsex\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\nNA\n37.84000\n18.32000\n185.6000\n3540.000\n\n\nAdelie\nfemale\n37.25753\n17.62192\n187.7945\n3368.836\n\n\nAdelie\nmale\n40.39041\n19.07260\n192.4110\n4043.493\n\n\nChinstrap\nfemale\n46.57353\n17.58824\n191.7353\n3527.206\n\n\nChinstrap\nmale\n51.09412\n19.25294\n199.9118\n3938.971\n\n\nGentoo\nNA\n45.62500\n14.55000\n215.7500\n4587.500\n\n\nGentoo\nfemale\n45.56379\n14.23793\n212.7069\n4679.741\n\n\nGentoo\nmale\n49.47377\n15.71803\n221.5410\n5484.836"
+  },
+  {
+    "objectID": "eda.html#penguin-size-vs-mass-by-species",
+    "href": "eda.html#penguin-size-vs-mass-by-species",
+    "title": "Penguins EDA",
+    "section": "Penguin Size vs Mass by Species",
+    "text": "Penguin Size vs Mass by Species\n\n\nCode\ndf %&gt;%\n  ggplot(aes(x = bill_length_mm, y = body_mass_g, color = species)) +\n  geom_point() + \n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\nCode\nDBI::dbDisconnect(con, shutdown = TRUE)"
+  },
+  {
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Model",
+    "section": "",
+    "text": "Code\nfrom palmerpenguins import penguins\nfrom pandas import get_dummies\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn import preprocessing"
+  },
+  {
+    "objectID": "model.html#get-data",
+    "href": "model.html#get-data",
+    "title": "Model",
+    "section": "Get Data",
+    "text": "Get Data\n\n\nCode\nimport duckdb\nfrom palmerpenguins import penguins\n\ncon = duckdb.connect('my-db.duckdb')\ndf = con.execute(\"SELECT * FROM penguins\").fetchdf().dropna()\n\ndf.head(3)\n\n\n  species     island  bill_length_mm  ...  body_mass_g     sex  year\n0  Adelie  Torgersen            39.1  ...       3750.0    male  2007\n1  Adelie  Torgersen            39.5  ...       3800.0  female  2007\n2  Adelie  Torgersen            40.3  ...       3250.0  female  2007\n\n[3 rows x 8 columns]"
+  },
+  {
+    "objectID": "model.html#define-model-and-fit",
+    "href": "model.html#define-model-and-fit",
+    "title": "Model",
+    "section": "Define Model and Fit",
+    "text": "Define Model and Fit\n\n\nCode\nX = get_dummies(df[['bill_length_mm', 'species', 'sex']], drop_first = True)\ny = df['body_mass_g']\n\nmodel = LinearRegression().fit(X, y)"
+  },
+  {
+    "objectID": "model.html#get-some-information",
+    "href": "model.html#get-some-information",
+    "title": "Model",
+    "section": "Get some information",
+    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\n\n\nR^2 0.8555368759537614\n\n\nCode\nprint(f\"Intercept {model.intercept_}\")\n\n\nIntercept 2169.269720939398\n\n\nCode\nprint(f\"Columns {X.columns}\")\n\n\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\n\n\nCode\nprint(f\"Coefficients {model.coef_}\")\n\n\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]\n\n\n\n\nCode\nfrom vetiver import VetiverModel\nv = VetiverModel(model, model_name = 'penguin_model', prototype_data = X)\n\n\n\n\nCode\nfrom pins import board_folder\nfrom vetiver import vetiver_pin_write\nb = board_folder('data/model', allow_pickle_read = True)\nvetiver_pin_write(b, v)\n\n\nModel Cards provide a framework for transparent, responsible reporting. \n Use the vetiver `.qmd` Quarto template as a place to start, \n with vetiver.model_card()\nWriting pin:\nName: 'penguin_model'\nVersion: 20240216T122516Z-a6f9b\n\n\n\n\nCode\nfrom vetiver import VetiverAPI\napp = VetiverAPI(v, check_prototype = True)\n\n\n\n\nCode\n#from vetiver import prepare_docker\n#prepare_docker(b, 'penguin_model')\n\n\n\n\nCode\nimport requests\n\nreq_data = {\n  \"bill_length_mm\": 0,\n  \"species_Chinstrap\": False,\n  \"species_Gentoo\": False,\n  \"sex_male\": False\n}\nreq = requests.post('http://127.0.0.1:8080/predict', json = [req_data])\nres = req.json().get('predict')[0]\nprint(res)\n\n\n2169.269720939398\n\n\n\n\nCode\nlibrary(httr2)\nreq &lt;- httr2::request(\"http://127.0.0.1:8080/predict\") |&gt;\n  httr2::req_body_json(\n    list(\n      list(\n        \"bill_length_mm\" = 0,\n        \"species_Chinstrap\" = FALSE,\n        \"species_Gentoo\" = FALSE,\n        \"sex_male\" = FALSE\n      )\n    )\n  ) |&gt;\n  httr2::req_perform()\nres &lt;- httr2::resp_body_json(req)$predict[[1]]\nres\n\n\n[1] 2169.27\n\n\n\n\nCode\ncon.close()"
+  }
+]
