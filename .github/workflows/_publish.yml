@@ -38,7 +38,7 @@ jobs:
           RENV_CONFIG_REPOS_OVERRIDE: https://packagemanager.rstudio.com/all/latest
           
       - name: Install Python and Dependencies
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.9.5'
           cache: 'pip'
